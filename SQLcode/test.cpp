@@ -25,7 +25,8 @@ int main()
 
 	conn = mysql_init(0);
 
-	conn = mysql_real_connect(conn, "localhost", "root", PASS, "database", 3306, NULL, 0);
+	conn = mysql_real_connect(conn, "localhost", "root", PASS, "database", 3306, NULL, 0); 
+	//create connection. In this case, 'database' is our database within the SQL server
 
 	if (conn)
 	{
@@ -38,7 +39,7 @@ int main()
 	}
 
 
-	string query = "SELECT * FROM employees order by Age";
+	string query = "SELECT * FROM employees order by Age"; //query that takes whole database, and sorts by age
 	const char* q = query.c_str();
 	qstate = mysql_query(conn, q);
 
@@ -50,7 +51,7 @@ int main()
 		res = mysql_store_result(conn);
 		while (row = mysql_fetch_row(res))
 		{
-			Employee person = Employee(row[0], row[1], row[2] ,row[3]);
+			Employee person = Employee(row[0], row[1], row[2] ,row[3]); //initialize object with the name, surname, age, and ID of the employee.
 			persons[i] = person;
 
 			cout << "ID: " << persons[i].getID() << ", Name: " << persons[i].getName() << ", Surname: " << persons[i].getSurname() << ", Age: " << persons[i].getAge() << endl;
